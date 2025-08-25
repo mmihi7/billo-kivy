@@ -1,0 +1,71 @@
+#:import Window kivy.core.window.Window
+<RestaurantConnectScreen>:
+    # Hide navigation bar for this screen
+    navigation_bar: None
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(16)
+        spacing: dp(24)
+        size_hint_y: None
+        height: Window.height
+        
+        # Add some top padding for better visual balance
+        Widget:
+            size_hint_y: 0.15
+        
+        # Main content area
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 0.8
+            spacing: dp(32)
+            padding: [dp(16), dp(0), dp(16), dp(0)]
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            
+            # Title and subtitle
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.3
+                spacing: dp(8)
+                
+                MDLabel:
+                    text: 'Connect to a Restaurant'
+                    font_style: 'H4'
+                    halign: 'center'
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    
+                MDLabel:
+                    text: 'Scan a QR code or enter a code manually to get started'
+                    theme_text_color: 'Secondary'
+                    halign: 'center'
+                    size_hint_y: None
+                    height: self.texture_size[1]
+            
+            # Buttons
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.6
+                spacing: dp(16)
+                padding: [dp(32), dp(16)]
+                
+                # QR Code Button
+                MDRaisedButton:
+                    id: scan_btn
+                    text: 'Scan QR Code'
+                    size_hint_y: None
+                    height: dp(56)
+                    font_size: '16sp'
+                    on_release: root.on_scan_pressed()
+                    disabled: not root.is_android
+                    md_bg_color: 0.2, 0.6, 0.8, 1 if root.is_android else 0.5, 0.5, 0.5, 1
+                    
+                # Demo Button
+                MDRaisedButton:
+                    id: demo_btn
+                    text: 'Try Demo Mode'
+                    size_hint_y: None
+                    height: dp(56)
+                    font_size: '16sp'
+                    on_release: root.on_demo_pressed()
+                    md_bg_color: 0.3, 0.7, 0.3, 1

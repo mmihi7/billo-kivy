@@ -1,0 +1,13 @@
+diff --git a/jnius/jnius_utils.pxi b/jnius/jnius_utils.pxi
+index e69de29..b6d2a3a 100644
+--- a/jnius/jnius_utils.pxi
++++ b/jnius/jnius_utils.pxi
+@@ -330,7 +330,7 @@ cdef int check_assignable_from_jobject(jobject jobj, jclass clazz):
+                 return -1
+ 
+         if r == 'J':
+-            if isinstance(arg, int) or isinstance(arg, long):
++            if isinstance(arg, int):
+                 continue
+             else:
+                 return -1

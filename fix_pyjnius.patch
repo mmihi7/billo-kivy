@@ -1,0 +1,11 @@
+--- jnius_utils.pxi.original
++++ jnius_utils.pxi
+@@ -320,7 +320,7 @@
+         return 1
+     if isinstance(arg, float):
+         return 2
+-    if isinstance(arg, long) and arg < 2147483648:
++    if isinstance(arg, int) and arg < 2147483648:
+         return 3
+     if isinstance(arg, int) and -2147483648 <= arg < 2147483648:
+         return 4

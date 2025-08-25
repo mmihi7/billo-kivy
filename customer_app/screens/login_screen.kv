@@ -1,0 +1,115 @@
+<LoginScreen>:
+    name: 'login'
+    
+    # Hide navigation bar for this screen
+    navigation_bar: None
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(20)
+        
+        # Header
+        BoxLayout:
+            size_hint_y: 0.3
+            orientation: 'vertical'
+            spacing: dp(10)
+            
+            MDLabel:
+                text: 'Welcome to Billo'
+                font_style: 'H4'
+                halign: 'center'
+                size_hint_y: 0.6
+                theme_text_color: 'Primary'
+                
+            MDLabel:
+                text: 'Sign in to continue'
+                theme_text_color: 'Secondary'
+                halign: 'center'
+                size_hint_y: 0.4
+        
+        # Form
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 0.5
+            spacing: dp(15)
+            
+            # Email Field
+            MDTextField:
+                id: email_field
+                hint_text: 'Email'
+                helper_text_mode: 'on_error'
+                helper_text: root.error_message if root.error_message and '@' not in root.email else ''
+                text: root.email
+                on_text: root.email = self.text
+                icon_right: 'email'
+                required: True
+                mode: 'rectangle'
+                size_hint_x: 0.9
+                pos_hint: {'center_x': 0.5}
+            
+            # Password Field
+            MDTextField:
+                id: password_field
+                hint_text: 'Password'
+                helper_text: root.error_message if root.error_message and '@' in root.email else ''
+                text: root.password
+                on_text: root.password = self.text
+                password: True
+                icon_right: 'key'
+                required: True
+                mode: 'rectangle'
+                size_hint_x: 0.9
+                pos_hint: {'center_x': 0.5}
+                on_text_validate: root.login()
+            
+            # Forgot Password
+            MDTextButton:
+                text: 'Forgot Password?'
+                theme_text_color: 'Custom'
+                text_color: app.theme_cls.primary_color
+                on_release: root.reset_password()
+                size_hint_x: 0.9
+                pos_hint: {'center_x': 0.5}
+                halign: 'right'
+            
+            # Login Button
+            MDRaisedButton:
+                text: 'SIGN IN'
+                size_hint_x: 0.9
+                pos_hint: {'center_x': 0.5}
+                on_release: root.try_login()
+                disabled: root.loading
+                md_bg_color: app.theme_cls.primary_color
+                text_color: 1, 1, 1, 1
+            
+            # Register Link
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 0.9
+                pos_hint: {'center_x': 0.5}
+                spacing: dp(5)
+                
+                MDLabel:
+                    text: "Don't have an account?"
+                    theme_text_color: 'Secondary'
+                    halign: 'right'
+                    size_hint_x: 0.7
+                    
+                MDTextButton:
+                    text: 'Sign Up'
+                    theme_text_color: 'Custom'
+                    text_color: app.theme_cls.primary_color
+                    on_release: root.navigate_to_register()
+                    size_hint_x: 0.3
+                    halign: 'left'
+        
+        # Loading Indicator
+        BoxLayout:
+            size_hint_y: 0.2
+            
+            MDSpinner:
+                size_hint: None, None
+                size: dp(46), dp(46)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                active: root.loading

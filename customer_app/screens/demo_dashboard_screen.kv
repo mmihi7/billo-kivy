@@ -1,0 +1,78 @@
+<DemoDashboardScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: dp(10)
+        padding: dp(16)
+        
+        # App Bar
+        MDTopAppBar:
+            title: "Billo - Demo Mode"
+            elevation: 10
+            right_action_items: [['logout', lambda x: root.on_logout_pressed()]]
+            
+        # Content
+        ScrollView:
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: dp(20)
+                size_hint_y: None
+                height: self.minimum_height
+                padding: [dp(16), dp(10), dp(16), dp(20)]
+                
+                # Restaurant Info
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: dp(100)
+                    spacing: dp(10)
+                    
+                    MDLabel:
+                        id: restaurant_name
+                        text: "Demo Restaurant"
+                        font_style: 'H4'
+                        halign: 'center'
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        
+                    MDLabel:
+                        id: table_number
+                        text: "Table: T-001"
+                        font_style: 'H6'
+                        theme_text_color: 'Secondary'
+                        halign: 'center'
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                
+                # Divider
+                MDSeparator:
+                    height: dp(1)
+                    
+                # Bills Section
+                MDLabel:
+                    text: "Your Bills"
+                    font_style: 'H5'
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    
+                # Bills List
+                ScrollView:
+                    size_hint_y: None
+                    height: dp(300)
+                    
+                    GridLayout:
+                        id: bills_list
+                        cols: 1
+                        spacing: dp(10)
+                        size_hint_y: None
+                        height: self.minimum_height
+                        
+                        # Bills will be added here programmatically
+                        
+                # Demo Notice
+                MDLabel:
+                    text: "This is a demo version with sample data.\nNo real transactions are being processed."
+                    theme_text_color: 'Secondary'
+                    halign: 'center'
+                    font_style: 'Caption'
+                    size_hint_y: None
+                    height: self.texture_size[1]
