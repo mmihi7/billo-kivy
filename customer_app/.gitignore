@@ -37,4 +37,4 @@ bin/
 *.pyo
 *.pyd
 .Python
-env/
+.env
